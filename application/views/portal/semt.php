@@ -1,7 +1,10 @@
 <?php
 
 $this->load->view('template/header',['title'=>'SeMT']);
-$this->load->view('template/navg');?>
+$this->load->view('template/navg');
+
+?>
+
 
   <div class="container">
       <section class="section section-posts grey lighten-4" style="padding:0px;">
@@ -22,43 +25,18 @@ $this->load->view('template/navg');?>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Mr. Pandian Ranganathan</td>
-                        <td>Head - SeMT</td>
-                        <td>head.semt@tn.gov.in</td>
-                        <td>+91 - 9878787878</td>
+                      <tr><?php foreach ($users as $u) 
+                            {
+                            ?>
+                        <td><?= $u->salutation?><?= $u->first_name?></td>
+                        <td><?= $u->desig_name?></td>
+                        <td><?= $u->email?></td>
+                        <td>+91-<?= $u->mobile?></td>
                         <td>
-                          <a href="profile.html" class="btn blue lighten-2">View Profile</a>
+                          <a href="<?php echo base_url();?>portal/viewprofile/<?= $u->user_id ?>" class="btn blue lighten-2">View Profile</a>
                         </td>
-                      </tr>
-                      <tr>
-                        <td>Mr. Sivakumar</td>
-                        <td>Senior Consultant</td>
-                        <td>sclt1.semt@tn.gov.in</td>
-                        <td>+91 - 9873421218</td>
-                        <td>
-                          <a href="profile.html" class="btn blue lighten-2">View Profile</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mr. Vidhya Shankar</td>
-                        <td>Senior Consultant</td>
-                        <td>sclt2.semt@tn.gov.in</td>
-                        <td>+91 - 9821212121</td>
-                        <td>
-                          <a href="profile.html" class="btn blue lighten-2">View Profile</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Mr. R Ravi Patil</td>
-                        <td>Consultant</td>
-                        <td>clt1.semt@tn.gov.in</td>
-                        <td>+91 - 9432323232</td>
-                        <td>
-                          <a href="profile.html" class="btn blue lighten-2">View Profile</a>
-                        </td>
-                      </tr>
-                                          
+                        </tr>
+                        <?php }?>
                     </tbody>
                   </table>
                 </div>

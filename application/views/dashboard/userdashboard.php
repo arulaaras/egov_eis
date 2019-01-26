@@ -1,14 +1,18 @@
-<!-- Section: Stats -->
-  <?php $data = $this->session->all_userdata();?>
-    <div class="row container" style="width:1100px!important;">
+<?php
+$this->load->view('dashboard/header2',['title'=>'Dashboard']);
+    $this->load->view('dashboard/navg2');
+?>
 
-        <blockquote><h5><?= $user_id; ?></h5></blockquote>
+<?php foreach ($profile as $p) { ?>
+     <div class="row container" style="width:1100px!important;">
+
+        <blockquote><h5>USER ID: &nbsp;<?= $p->username ?></h5></blockquote>
         <div class="col m4 l4 s12 card center">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="<?php echo base_url() ?>assets/profilepic/asye5.tnega.jpg">
+            <img class="activator" src="<?php echo base_url() ?>assets/profilepic/<?= $p->username?>.jpg">
           </div>
           <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><h5 class="blue-text text-darken-4" style="font-size: 20px;">Mr. Arularasan Periyasamy</h5></span>
+            <span class="card-title activator grey-text text-darken-4"><h5 class="blue-text text-darken-4" style="font-size: 20px;"><?= $p->first_name ?></h5></span>
             <p><a href="#" class="btn blue lighten-2">Update Photo</a></p>
           </div>
           </div>
@@ -20,35 +24,35 @@
        <tbody>
          <tr> 
            <th>Full Name</th><th>:</th>
-           <th>Mr. Arularasan Periyasamy</th>
+           <th><?= $p->first_name ?>&nbsp;&nbsp;<?= $p->last_name ?></th>
          </tr>
          <tr>
            <th>Designation</th><th>:</th>
-           <th>Assistant System Engineer</th>
+           <th><?= $p->desig_name?></th>
          </tr>
          <tr>  
             <th>Date of Joining</th><th>:</th>
-            <th>02 May 2017</th>
+            <th><?= $p->join_date?></th>
           </tr>
          <tr>  
            <th>Age / Date of Birth</th><th>:</th>
-           <th>27 Years / 25 November 1991</th>
+           <th><?= $p->age?> Years / <?= $p->dob?></th>
          </tr>
          <tr>  
           <th>Official Mail</th><th>:</th>
-          <th>asye5.tnega@tn.gov.in</th>
+          <th><?= $p->email?></th>
         </tr>
 		<tr>  
           <th>Contact Info</th><th>:</th>
-          <th>+91 - 7502224321</th>
+          <th>+91 - <?= $p->mobile?></th>
         </tr>
         <tr>  
             <th>Gender</th><th>:</th>
-            <th>Male</th>
+            <th><?= $p->gender?></th>
           </tr>
           <tr>  
               <th>Marital Status</th><th>:</th>
-              <th>Single</th>
+              <th><?= $p->marital?></th>
             </tr>
         
        
@@ -68,12 +72,12 @@
                    <tbody>
 				      <tr> 
                        <th>Present Address</th><th>:</th>
-                       <th>4/7, Thomaiappan Street,<br>Ganapathy Colony,<br>Royapettah,<br>Chennai-600 018</th>
+                       <th><?= $p->comm_address?></th>
                      </tr>
                      
                         <tr> 
                             <th>Permanent Address</th><th>:</th>
-                            <th>2/76, Onniyampatti (Village),<br>Krishnapuram (PO),<br>Dharmapuri-635 202</th>
+                            <th><?= $p->perm_address?></th>
                           </tr>
 						  
                          
@@ -498,4 +502,5 @@
     </form>
     </div>
   </div>
-
+<?php }?>
+<?php $this->load->view('template/footer2');?>

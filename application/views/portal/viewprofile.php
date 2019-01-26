@@ -1,19 +1,20 @@
 <?php
 
-$this->load->view('template/header',['title'=>'User Name']);
+$this->load->view('template/header',['title'=>'View Profile']);
 $this->load->view('template/navg');?>
 
+  <?php foreach ($profile as $prof) {
+   ?>
 
-    <!-- Section: Stats -->
     <div class="row container" style="width:1100px!important;">
 
-        <blockquote><h5>ARULARASAN</h5></blockquote>
+        <blockquote><h5>USER ID: <?= $prof->username?></h5></blockquote>
         <div class="col m4 l4 s12 card center">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="<?php echo base_url() ?>assets/profilepic/asye5.tnega.jpg">
+            <img class="activator" src="<?php echo base_url() ?>assets/profilepic/<?= $prof->username?>.jpg">
           </div>
           <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><h5 class="blue-text text-darken-4" style="font-size: 20px;">Mr. Arularasan Periyasamy</h5></span>
+            <span class="card-title activator grey-text text-darken-4"><h5 class="blue-text text-darken-4" style="font-size: 20px;"><?= $prof->salutation?>&nbsp;<?= $prof->first_name?></h5></span>
             <p><a href="#" class="btn blue lighten-2">Update Photo</a></p>
           </div>
           </div>
@@ -25,35 +26,35 @@ $this->load->view('template/navg');?>
        <tbody>
          <tr> 
            <th>Full Name</th><th>:</th>
-           <th>Mr. Arularasan Periyasamy</th>
+           <th><?= $prof->salutation?>&nbsp;<?= $prof->first_name?>&nbsp;<?= $prof->last_name?></th>
          </tr>
          <tr>
            <th>Designation</th><th>:</th>
-           <th>Assistant System Engineer</th>
+           <th><?= $prof->desig_name?></th>
          </tr>
          <tr>  
             <th>Date of Joining</th><th>:</th>
-            <th>02 May 2017</th>
+            <th><?= $prof->join_date?></th>
           </tr>
          <tr>  
            <th>Age / Date of Birth</th><th>:</th>
-           <th>27 Years / 25 November 1991</th>
+           <th><?= $prof->age?> Years / <?= $prof->dob?></th>
          </tr>
          <tr>  
           <th>Official Mail</th><th>:</th>
-          <th>asye5.tnega@tn.gov.in</th>
+          <th><?= $prof->email?></th>
         </tr>
 		<tr>  
           <th>Contact Info</th><th>:</th>
-          <th>+91 - 7502224321</th>
+          <th>+91 - <?= $prof->mobile?></th>
         </tr>
         <tr>  
             <th>Gender</th><th>:</th>
-            <th>Male</th>
+            <th><?= $prof->gender?></th>
           </tr>
           <tr>  
               <th>Marital Status</th><th>:</th>
-              <th>Single</th>
+              <th><?= $prof->marital?></th>
             </tr>
         
        
@@ -73,12 +74,12 @@ $this->load->view('template/navg');?>
                    <tbody>
 				      <tr> 
                        <th>Present Address</th><th>:</th>
-                       <th>4/7, Thomaiappan Street,<br>Ganapathy Colony,<br>Royapettah,<br>Chennai-600 018</th>
+                       <th><?= $prof->comm_address?></th>
                      </tr>
                      
                         <tr> 
                             <th>Permanent Address</th><th>:</th>
-                            <th>2/76, Onniyampatti (Village),<br>Krishnapuram (PO),<br>Dharmapuri-635 202</th>
+                            <th><?= $prof->perm_address?></th>
                           </tr>
 						  
                          
@@ -86,7 +87,7 @@ $this->load->view('template/navg');?>
                  </table></p>
 				 <br>
 				  <p>
-                <!-- STRIPED TABLE -->
+            <!-- STRIPED TABLE -->
        <table class="striped center-align">
            
            <tbody class="center">
@@ -128,23 +129,23 @@ $this->load->view('template/navg');?>
 					 
                   </tr>
                  <tr> 
-                   <th>Tamil Nadu e-Governance Agency</th>
-                   <th>Assistant System Engineer</th>
-                   <th>May 2017 - Present</th>
+                   <th><?= $prof->organization?></th>
+                   <th><?= $prof->desig_name?></th>
+                   <th><?= $prof->join_date?> - Present</th>
                    <th>1 year 8 Months</th>
                  </tr>
                  <tr> 
-                    <th>JayPee Technologies</th>
-                    <th>PHP Developer</th>
-                    <th>Aug 2015 - Apr 2017</th>
-                    <th>1 year 9 Months</th>
+                  <?php foreach ($employer as $emp) {
+                    ?>
+                  
+                    
+                    <th><?= $emp->employer_name?></th>
+                    <th><?= $emp->exp_designation?></th>
+                    <th><?= $emp->emp_from?> - <?= $emp->emp_to?></th>
+                    <th><?= $emp->emp_exp?></th>
+                  
                   </tr>
-                  <tr> 
-                      <th>Varuvan Vadivelan Institute of Technology</th>
-                      <th>Junior System Administrator</th>
-                      <th>Jul 2013 - Aug 2015</th>
-                      <th>2 year 1 Months</th>
-                    </tr>
+                   <?php } ?>
                 
                </tbody>
              </table></p>
@@ -210,7 +211,7 @@ $this->load->view('template/navg');?>
         </ul>
       </div>
   </div>
-
+  <?php } ?>  
     <?php
 $this->load->view('template/footer2');
 ?>

@@ -15,6 +15,7 @@ class Users extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('username','Username','required');
 		$this->form_validation->set_rules('password','Password','required');
+		$this->form_validation->set_error_delimiters('', '');
 		if($this->form_validation->run()!=FALSE)
 		{
 			$username = $this->input->post('username');
@@ -27,22 +28,18 @@ class Users extends CI_Controller {
 				);
 
 				$this->session->set_userdata($session_data);
+				$logstatus = $this->userm->set_log_status($username);
 				redirect(base_url().'Dashboard/home');
 			}
 			else
 			{
-				echo "<script>
-						alert('Invalid Username and Password');
-							window.location.href='".base_url()."portal/login';
-					</script>";
+				$logerror['logerror'] = "Invalid Username or Password";
+				$this->load->view('portal/login', $logerror);
 		    }
 		}
 		else
 		{
-		    echo "<script>
-						alert('Kindly fill all the fields');
-							window.location.href='".base_url()."portal/login';
-					</script>";
+		    $this->load->view('portal/login');
 		}
 
 	}

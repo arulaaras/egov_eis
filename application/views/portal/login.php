@@ -11,14 +11,17 @@ $this->load->view('template/navg');?>
     <div class="modal-content">
       <h4>Account Login</h4>
       <P>Login to access your Dashboard</P>
+      <span class="helper-text" ><p style="color:purple;"><?php if(isset($logerror)) echo $logerror;?></p></span>
      
         <div class="input-field">
           <input type="text" id="username" name="username">
           <label for="username">Username</label>
+          <span class="helper-text" data-error="<?= form_error('username')?>" data-success="right"><p style="color: red;"><?= form_error('username')?></p></span>
         </div>
         <div class="input-field">
           <input type="password" id="password" name="password">
           <label for="password">Password</label>
+          <span class="helper-text" data-error="<?= form_error('password')?>" data-success="right"><p style="color: red;"><?= form_error('password')?></p></span>
         </div>
     </div>
     <div class="modal-footer right" >

@@ -3,6 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Portal extends CI_Controller {
 
+	public function __construct()
+	{
+    parent::__construct();
+    $this->load->model('UserModel','userm');
+    $this->load->model('Profilemodel','prof');
+    $this->load->model('Portalmodel','port');
+  	}
+
+
 	public function index()
 	{
 		$this->load->view('template/header',['title'=>'Home']);
@@ -24,7 +33,11 @@ class Portal extends CI_Controller {
 	}
 	public function semt()
 	{
-		$this->load->view('portal/semt');
+		//$user_role = $this->session->userdata('');
+		//$userid=1;
+		$semtdata['users'] = $this->port->semt_data();
+		//print_r($semtdata);
+		$this->load->view('portal/semt',$semtdata);
 	}
 	public function administration()
 	{
@@ -38,9 +51,13 @@ class Portal extends CI_Controller {
 	{
 		$this->load->view('portal/contact');
 	}
-	public function viewprofile()
+	public function viewprofile($vdata)
 	{
-		$this->load->view('portal/viewprofile');
+		
+		$viewdata['employer'] = $this->port->getEmpById($vdata);
+		$viewdata['profile'] = $this->port->getUserById($vdata);
+		//print_r($viewdata);
+		$this->load->view('portal/viewprofile',$viewdata);
 	}
 	public function login()
 	{

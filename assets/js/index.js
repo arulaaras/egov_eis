@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(window).on("load", function() {
     $(".loader")
-      .delay(2)
+      .delay(1)
       .fadeOut("fast");
   });
 
@@ -28,15 +28,7 @@ $(document).ready(function() {
     closeOnSelect: true
   });
 
-  // INIT TIMEPICKER
-  $(".timepicker").pickatime({
-    default: "now",
-    twelvehour: true,
-    donetext: "ok",
-    cleartext: "clear",
-    canceltext: "cancel",
-    autoclose: true
-  });
+
 
   // INIT AUTOCOMPLETE
   $(".autocomplete").autocomplete({
@@ -52,4 +44,6 @@ $(document).ready(function() {
     limit: 20,
     minLength: 2
   });
+
+
 });

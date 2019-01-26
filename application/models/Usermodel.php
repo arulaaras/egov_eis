@@ -113,10 +113,28 @@
        return $query;
     }
   
+
+   public function myjoin($id)
+   {
+    $this->db->select('*');
+    $this->db->from('profile');
+    $this->db->where('user_id',$id);
+    $this->db->join('designation','profile.designation = designation.desig_id');
+    return $this->db->get()->result();
+
+   }
    
 
+   public function update_prof($rdata)
+    {
+        return $this->db->where(['user_id'=>$rdata['user_id']])->update('profile',$rdata);
+    }
 
 
+    public function set_log_status($luser)
+    {
+      
+    }
 
 
 

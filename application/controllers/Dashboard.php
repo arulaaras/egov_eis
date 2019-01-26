@@ -7,6 +7,7 @@ class Dashboard extends CI_Controller {
 	{
     parent::__construct();
     $this->load->model('UserModel','userm');
+    $this->load->model('Profilemodel','prof');
   	}
 
 	public function home()
@@ -17,6 +18,7 @@ class Dashboard extends CI_Controller {
        {
               $this->session->set_userdata('user_id',$result[0]->user_id);
               $this->session->set_userdata('user_role',$result[0]->user_role);
+              $this->session->set_userdata('log_status',$result[0]->log_status);
               $this->confirm_old_password();
        }        
           
@@ -30,10 +32,10 @@ class Dashboard extends CI_Controller {
 
 	public function userpage()
 	{
-		$this->load->view('dashboard/header2',['title'=>'Dashboard']);
-			$this->load->view('dashboard/navg2');
-			$this->load->view('dashboard/userdashboard');
-			$this->load->view('template/footer2');
+     $user_id = $this->session->userdata('user_id');
+     $profdata['users']= $this->session->all_userdata();
+     $profdata['profile']= $this->prof->profile_join_data($user_id);
+     $this->load->view('dashboard/userdashboard',$profdata);
 	}
 
 	private function confirm_old_password()
@@ -53,12 +55,13 @@ class Dashboard extends CI_Controller {
 
 
 
-  	public function editprofile()
+  	public function modifyprofile()
 	{
-		
-		$this->load->view('dashboard/editprofile');
-		
-	}
+		 $user_id = $this->session->userdata('user_id');
+     $edata['designation'] = $this->userm->getDesig();
+     $edata['profile']= $this->userm->myjoin($user_id);
+     $this->load->view('dashboard/updateprofile',$edata);
+  }
 
 
 
@@ -78,7 +81,7 @@ class Dashboard extends CI_Controller {
             'user_id'=>$this->session->userdata('user_id'),
             'password'=>$this->input->post('npassword2'),
             'default_pass'=>TRUE
-          );
+                      );
 
           $result = $this->userm->update_old_password($data);
           if($result==true)
@@ -112,7 +115,7 @@ class Dashboard extends CI_Controller {
     }
 
 
-    public function update_profile()
+    public function insert_profile()
     {
       if(!$this->session->userdata('username'))
       {
@@ -155,11 +158,55 @@ class Dashboard extends CI_Controller {
           }
           else
           {
-             echo "update values";
+             
+            $this->editprofile();
+              
           }
      } 
      
 
+    }
+
+
+
+    public function update_profile()
+    {
+      $user_id = $this->session->userdata('user_id');
+      $data = $this->userm->check_data($user_id);
+      if($data == true)
+      {
+        $update_data = array(
+                  'user_id'=>$user_id,
+                  'salutation' =>$this->input->post('salutation'),
+                  'first_name'=>$this->input->post('first_name'),
+                  'last_name'=>$this->input->post('last_name'),
+                  'dob'=>$this->input->post('dob'),
+                  'age'=>$this->input->post('age'),
+                  'comm_address'=>$this->input->post('comm_address'),
+                  'perm_address'=>$this->input->post('perm_address'),
+                  'mobile'=>$this->input->post('mobile'),
+                  'email'=>$this->input->post('email'),
+                  'gender'=>$this->input->post('gender'),
+                  'marital'=>$this->input->post('marital'),
+                  'organization' => $this->input->post('organization'),
+                  'designation'=>$this->input->post('designation'),
+                  'join_date' => $this->input->post('join_date')
+                  );
+        $up = $this->userm->update_prof($update_data);
+        if($up==true)
+        {
+           redirect('dashboard/userpage');          
+        }
+        else
+        {
+          echo "values not inserted properly";
+          //$this->editprofile();
+        }
+      }
+      else
+      {
+        print_r($user_id);
+      }
     }
 
 

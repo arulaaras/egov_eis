@@ -23,8 +23,8 @@ $this->load->view('template/navg');?>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Mrs. Ananda Sofia</td>
-                        <td>ASA</td>
+                        <td>Mrs. Arularasan Periyasamy</td>
+                        <td>Assistant System Analyst</td>
                         <td>asye1.tnega@tn.gov.in</td>
                         <td>+91 - 9878787878</td>
                         <td>

@@ -11,7 +11,7 @@
           </a>
           <ul class="right hide-on-med-and-down">
             <li><a href="<?php echo base_url()?>dashboard/home">Dashboard</a></li>
-            <li><a href="<?php echo base_url()?>dashboard/editprofile">Update Profile</a></li>
+            <li><a href="<?php echo base_url()?>dashboard/modifyprofile">Update Profile</a></li>
             <li><a href="<?php echo base_url()?>dashboard/changepassword">Change Password</a></li>
           </ul>
           <!-- Side nav -->
@@ -35,7 +35,7 @@
                 <i class="material-icons">dashboard</i> Dashboard</a
               >
             </li>
-            <li><a href="<?php echo base_url()?>dashboard/editprofile">Update Profile</a></li>
+            <li><a href="<?php echo base_url()?>dashboard/modifyprofile">Update Profile</a></li>
             <li><a href="<?php echo base_url()?>dashboard/changepassword">Change Password</a></li>
             <li><div class="divider"></div></li>
             <li><a href="<?php echo base_url()?>" class="waves-effect">Logout</a></li>
