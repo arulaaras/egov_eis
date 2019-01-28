@@ -118,8 +118,9 @@ $this->load->view('dashboard/header2',['title'=>'Update Profile']);
                   </div>
             </div>
             <div class="col s12 m4 l4">
-                <div class="input-field">
-                    <input type="text" class="datepicker" id="join_date" name="join_date" value="<?= $prof->join_date?>"><label for="date">Date of Joining</label>
+                 <div class="input-field">
+                    <input type="text" class="datepicker" id="join_date" name="join_date" value="<?= $prof->join_date?>">
+                    <label for="date">Date of  Joining</label>
                   </div>
             </div>
         </div>

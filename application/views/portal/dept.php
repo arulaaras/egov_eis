@@ -8,7 +8,7 @@ $this->load->view('template/navg');?>
       <blockquote><h5>Commissioner of e-Governance</h5></blockquote>
       <div class="col m4 l4 s12 card center">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="<?php echo base_url() ?>assets/profilepic/ceo.tnega.jpg">
+          <img class="activator" src="<?php echo base_url() ?>assets/profilepic/1.jpg">
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4"><h5 class="blue-text text-darken-4" style="font-size: 20px;">Mr Santosh K Mishra I.A.S.,</h5></span>
@@ -52,7 +52,7 @@ $this->load->view('template/navg');?>
         <blockquote><h5>Joint Commissioner</h5></blockquote>
         <div class="col m4 l4 s12 card center">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="<?php echo base_url() ?>assets/img/jceo.jpg">
+            <img class="activator" src="<?php echo base_url() ?>assets/profilepic/2.jpg">
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4"><h5 class="blue-text text-darken-4" style="font-size: 20px;">Mrs Ramana Saraswathi I.A.S.,</h5></span>
@@ -97,7 +97,7 @@ $this->load->view('template/navg');?>
           <blockquote><h5>Joint Director (Technical)</h5></blockquote>
           <div class="col m4 l4 s12 card center">
             <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="<?php echo base_url() ?>assets/profilepic/jdtec.tnega.jpg">
+              <img class="activator" src="<?php echo base_url() ?>assets/profilepic/3.jpg">
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4"><h5 class="blue-text text-darken-4" style="font-size: 20px;">Mr Ifthikar Ahamed M.S</h5></span>

@@ -51,7 +51,7 @@ $this->load->view('dashboard/header2',['title'=>'Edit Profile']);
           <div class="row">
             <div class="col s12 m3">
                 <div class="input-field">
-                    <input type="text" class="datepicker" id="dob" name="dob">
+                    <input type="date" class="datepicker" id="dob" name="dob">
                     <label for="date">Date of  Birth</label>
                   </div>
             
@@ -119,8 +119,8 @@ $this->load->view('dashboard/header2',['title'=>'Edit Profile']);
             </div>
             <div class="col s12 m4 l4">
                 <div class="input-field">
-                    <input type="text" class="datepicker" id="join_date" name="join_date">
-                    <label for="date">Date of Joining</label>
+                    <input type="text" class="datepicker" id="join_date" name="join_date" value="">
+                    <label for="date">Date of  Joining</label>
                   </div>
             </div>
         </div>

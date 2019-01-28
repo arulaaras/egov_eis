@@ -53,8 +53,10 @@ class Portal extends CI_Controller {
 	}
 	public function viewprofile($vdata)
 	{
-		
+		$viewdata['education'] = $this->port->getEduById($vdata);
+		$viewdata['learn'] = $this->port->getLearnById($vdata);
 		$viewdata['employer'] = $this->port->getEmpById($vdata);
+		$viewdata['skills'] = $this->port->getSkillsById($vdata);
 		$viewdata['profile'] = $this->port->getUserById($vdata);
 		//print_r($viewdata);
 		$this->load->view('portal/viewprofile',$viewdata);

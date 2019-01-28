@@ -6,8 +6,11 @@ class Dashboard extends CI_Controller {
 	public function __construct()
 	{
     parent::__construct();
-    $this->load->model('UserModel','userm');
+    $this->load->model('Usermodel','userm');
     $this->load->model('Profilemodel','prof');
+    $this->load->model('Portalmodel','port');
+    $this->load->model('Editmodel','edit');
+    $this->load->library('upload');
   	}
 
 	public function home()
@@ -34,8 +37,22 @@ class Dashboard extends CI_Controller {
 	{
      $user_id = $this->session->userdata('user_id');
      $profdata['users']= $this->session->all_userdata();
-     $profdata['profile']= $this->prof->profile_join_data($user_id);
-     $this->load->view('dashboard/userdashboard',$profdata);
+     $profdata['profile'] = $this->port->getUserById($user_id);
+     $profdata['education'] = $this->port->getEduById($user_id);
+    $profdata['learn'] = $this->port->getLearnById($user_id);
+    $profdata['employer'] = $this->port->getEmpById($user_id);
+    $profdata['skills'] = $this->port->getSkillsById($user_id);
+    if($user_id == 1)
+     {
+       //print_r($profdata);
+       $this->load->view('dashboard/admindashboard',$profdata);
+     }
+     else
+     {
+        //print_r($profdata);
+       $this->load->view('dashboard/userdashboard',$profdata);
+     }
+     
 	}
 
 	private function confirm_old_password()
@@ -81,6 +98,7 @@ class Dashboard extends CI_Controller {
             'user_id'=>$this->session->userdata('user_id'),
             'password'=>$this->input->post('npassword2'),
             'default_pass'=>TRUE
+
                       );
 
           $result = $this->userm->update_old_password($data);
@@ -132,7 +150,7 @@ class Dashboard extends CI_Controller {
                   'salutation' =>$this->input->post('salutation'),
                   'first_name'=>$this->input->post('first_name'),
                   'last_name'=>$this->input->post('last_name'),
-                  'dob'=>$this->input->post('dob'),
+                  'dob'=>date("Y-m-d",strtotime($this->input->post('dob'))),
                   'age'=>$this->input->post('age'),
                   'comm_address'=>$this->input->post('comm_address'),
                   'perm_address'=>$this->input->post('perm_address'),
@@ -140,9 +158,9 @@ class Dashboard extends CI_Controller {
                   'email'=>$this->input->post('email'),
                   'gender'=>$this->input->post('gender'),
                   'marital'=>$this->input->post('marital'),
-                  'organization' => $this->input->post('organization'),
+                  'organization'=>$this->input->post('organization'),
                   'designation'=>$this->input->post('designation'),
-                  'join_date' => $this->input->post('join_date')
+                  'join_date'=>$this->input->post('join_date')
                   );
 
                   $q = $this->userm->insert($profile_data);
@@ -180,7 +198,7 @@ class Dashboard extends CI_Controller {
                   'salutation' =>$this->input->post('salutation'),
                   'first_name'=>$this->input->post('first_name'),
                   'last_name'=>$this->input->post('last_name'),
-                  'dob'=>$this->input->post('dob'),
+                  'dob'=>date("Y-m-d",strtotime($this->input->post('dob'))),
                   'age'=>$this->input->post('age'),
                   'comm_address'=>$this->input->post('comm_address'),
                   'perm_address'=>$this->input->post('perm_address'),
@@ -188,14 +206,14 @@ class Dashboard extends CI_Controller {
                   'email'=>$this->input->post('email'),
                   'gender'=>$this->input->post('gender'),
                   'marital'=>$this->input->post('marital'),
-                  'organization' => $this->input->post('organization'),
+                  'organization'=>$this->input->post('organization'),
                   'designation'=>$this->input->post('designation'),
-                  'join_date' => $this->input->post('join_date')
+                  'join_date'=>$this->input->post('join_date')
                   );
         $up = $this->userm->update_prof($update_data);
         if($up==true)
         {
-           redirect('dashboard/userpage');          
+          redirect('dashboard/userpage');          
         }
         else
         {
@@ -210,6 +228,83 @@ class Dashboard extends CI_Controller {
     }
 
 
+    public function update_picture()
+    {
+       // $username = 'asye5';
+        $user_id = $this->session->userdata('user_id');
+        $config['upload_path']   = './assets/profilepic/';
+        $config['allowed_types'] = '*';
+        $config['overwrite'] = TRUE;
+        $config['max_size']             = 1024;
+        $config['max_width']            = 320;
+        $config['max_height']           = 280;
+        $config['file_ext']           = 'jpg';
+        $config['file_name'] = $user_id;
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if ( ! $this->upload->do_upload('userfile'))
+               {
+                        $error = array('error' => $this->upload->display_errors());
+                        echo "upload failed";
+                        print_r($error);
+
+                       // $this->load->view('upload_form', $error);
+                }
+                else
+                {
+                        $data = array('upload_data' => $this->upload->data());
+                        echo "upload success";
+                        //print_r($data);
+                         redirect('dashboard/userpage','refresh');
+                }
+                    
+        
+    }
+
+
+    public function view_employees()
+    {
+
+      
+
+      $vdata['users']= $this->port->get_all_users();
+      //print_r($vdata);
+      $this->load->view('dashboard/viewemployees', $vdata);
+    }
+
+
+
+    public function search()
+    {
+      $this->form_validation->set_rules('query', 'Query','required');
+      $this->form_validation->set_error_delimiters('<div class="purple-text">','</div>');
+      if($this->form_validation->run())
+      {
+        $query = $this->input->post('query');
+        $record = $this->prof->searchRecord($query);
+        $this->load->view('dashboard/searchuser',['record' => $record]);
+      }
+      else
+      {
+        echo validation_errors();
+      }
+
+    }
+
+
+
+
+   // public function editedu($eduedit)
+   // {
+    //  $edudata = $this->edit->get_edu_edit($eduedit);
+    //  $this->load->view('dashboard/editedu', $edudata);
+   // }
+
+    
+    
+    
+
+    
 
 
 

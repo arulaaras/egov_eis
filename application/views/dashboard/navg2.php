@@ -20,13 +20,13 @@
               <div class="user-view">
                 <div class="background"><img src="<?php echo base_url() ?>assets/img/ocean.jpg" alt="" /></div>
                 <a href="#">
-                  <img src="<?php echo base_url() ?>assets/profilepic/asye5.tnega.jpg" alt="" class="circle" />
+                  <img src="<?php echo base_url() ?>assets/profilepic/<?php echo $this->session->userdata('user_id')?>.jpg" alt="" class="circle" />
                 </a>
                 <a href="#">
-                  <span class="name white-text">Arularasan</span>
+                  <span class="name white-text"></span>
                 </a>
                 <a href="#">
-                  <span class="email white-text">asye5.tnega@tn.gov.in</span>
+                  <span class="email white-text"><?php echo $this->session->userdata('username')?></span>
                 </a>
               </div>
             </li>
@@ -38,7 +38,7 @@
             <li><a href="<?php echo base_url()?>dashboard/modifyprofile">Update Profile</a></li>
             <li><a href="<?php echo base_url()?>dashboard/changepassword">Change Password</a></li>
             <li><div class="divider"></div></li>
-            <li><a href="<?php echo base_url()?>" class="waves-effect">Logout</a></li>
+            <li><a href="<?php echo base_url()?>users/logout" class="waves-effect">Logout</a></li>
           </ul>
         </div>
       </div>

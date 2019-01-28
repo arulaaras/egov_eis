@@ -133,8 +133,20 @@
 
     public function set_log_status($luser)
     {
-      
+        $this->db->set('log_status',1);
+        $this->db->where('username',$luser);
+        $this->db->update('users');
     }
+
+    public function set_logout_status($luser)
+    {
+        $this->db->set('log_status',0);
+        $this->db->where('username',$luser);
+        $this->db->update('users');
+    }
+
+
+
 
 
 

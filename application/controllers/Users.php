@@ -7,7 +7,7 @@ class Users extends CI_Controller {
 	{
     parent::__construct();
     $this->load->library('form_validation');
-    $this->load->model('UserModel','userm');
+    $this->load->model('Usermodel','userm');
   	}
 	
 	public function login_validation()
@@ -28,7 +28,7 @@ class Users extends CI_Controller {
 				);
 
 				$this->session->set_userdata($session_data);
-				$logstatus = $this->userm->set_log_status($username);
+				$this->userm->set_log_status($username);
 				redirect(base_url().'Dashboard/home');
 			}
 			else
@@ -48,8 +48,18 @@ class Users extends CI_Controller {
 
 	public function logout()
 	{
-		$this->session->unset_userdata('username');
-		redirect(base_url().'portal/index');
+		
+		$luser = $this->session->userdata('username');
+		$this->userm->set_logout_status($luser);
+		//$sdata = $this->session->all_userdata();
+		//print_r($sdata);
+		session_unset(); 
+
+// destroy the session 
+		session_destroy();
+		//$expdata = $this->session->all_userdata();
+		//print_r($expdata);
+		 redirect(base_url().'portal/index');
 	}
 
 }

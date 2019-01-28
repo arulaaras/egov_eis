@@ -27,9 +27,6 @@
         $this->db->join('users','profile.user_id = users.user_id','left');
         $this->db->join('designation','profile.designation = designation.desig_id','left');
         return $this->db->get()->result();
-
-       // $query = $this->db->select('*')->from('admin')->where(['adminid'=>$id])->get();
-        //return $query->row();
     }
     public function getEmpById($id)
         
@@ -37,13 +34,46 @@
         $this->db->select('*');
         $this->db->from('employer');
         $this->db->WHERE('user_id',$id);
-        //$this->db->join('learn','profile.user_id = learn.user_id','left');
-        //$this->db->join('education','profile.user_id = education.user_id','left');
-        //$this->db->join('skills','profile.user_id = skills.user_id','left');
-        //$this->db->join('employer','users.user_id = employer.user_id');
+        return $this->db->get()->result();
+    }
+
+    public function getSkillsById($id)
+        
+    {
+        $this->db->select('*');
+        $this->db->from('skills');
+        $this->db->WHERE('user_id',$id);
+        return $this->db->get()->result();
+    }
+
+
+    public function getEduById($id)
+        
+    {
+        $this->db->select('*');
+        $this->db->from('education');
+        $this->db->WHERE('user_id',$id);
+        return $this->db->get()->result();
+    }
+
+    public function getLearnById($id)
+        
+    {
+        $this->db->select('*');
+        $this->db->from('learn');
+        $this->db->WHERE('user_id',$id);
         return $this->db->get()->result();
     }
         
+    public function get_all_users()
+    {
+      $this->db->select('*');
+      $this->db->from('users');
+      $this->db->order_by("users.user_id", "asc");
+      $this->db->join('profile','users.user_id = profile.user_id','left');
+      $this->db->join('designation','profile.designation = designation.desig_id','left');
+      return $this->db->get()->result();
+    }
 
 
 
