@@ -45,7 +45,7 @@
     <div class="container">
       <div class="row">
         <div class="col m2 s12">
-          <div class="logo"><img src="<?php echo base_url() ?>assets/img/logo.png" alt="TNeGA" /></div>
+          <div class="logo responsive-img"><img src="<?php echo base_url() ?>assets/img/logo.png" alt="TNeGA" /></div>
         </div>
         <div class="col m8 s12" id="offname">
           <p>

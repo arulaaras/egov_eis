@@ -6,7 +6,7 @@ class Portal extends CI_Controller {
 	public function __construct()
 	{
     parent::__construct();
-    $this->load->model('UserModel','userm');
+    $this->load->model('Usermodel','userm');
     $this->load->model('Profilemodel','prof');
     $this->load->model('Portalmodel','port');
   	}

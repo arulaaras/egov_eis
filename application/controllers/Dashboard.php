@@ -253,7 +253,7 @@ class Dashboard extends CI_Controller {
                 else
                 {
                         $data = array('upload_data' => $this->upload->data());
-                        echo "upload success";
+                       // echo "upload success";
                         //print_r($data);
                          redirect('dashboard/userpage','refresh');
                 }
@@ -281,8 +281,8 @@ class Dashboard extends CI_Controller {
       if($this->form_validation->run())
       {
         $query = $this->input->post('query');
-        $record = $this->prof->searchRecord($query);
-        $this->load->view('dashboard/searchuser',['record' => $record]);
+        $record['profile'] = $this->prof->searchRecord($query);
+        $this->load->view('dashboard/searchuser',$record);
       }
       else
       {

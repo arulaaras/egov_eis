@@ -28,7 +28,7 @@ $this->load->view('dashboard/header2',['title'=>' View Employees']);
                       </tr>
                     </thead>
                     <tbody>
-                      <tr><?php foreach ($record as $u) {
+                      <tr><?php foreach ($profile as $u) {
                                                     ?>
                         <td><?= $u->salutation?>&nbsp;<?= $u->first_name?>&nbsp;<?= $u->last_name?></td>
                         <td><?= $u->desig_name?></td>
