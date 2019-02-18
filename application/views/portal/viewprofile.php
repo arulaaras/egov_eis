@@ -24,7 +24,6 @@ $this->load->view('template/navg');?>
   </div>
   <div class="col m8 l8 s12 center-align">
     <p>
-      <!-- STRIPED TABLE -->
       <table class="striped center-align">
 
         <tbody>
@@ -114,7 +113,7 @@ $this->load->view('template/navg');?>
 
 
               </tr>
-             <tr>
+              <tr>
                 <?php foreach ($education as $edu) {
                     ?>
 
@@ -196,7 +195,7 @@ $this->load->view('template/navg');?>
 
                 <th><?= $skl->skill_name?></th>
                 <th><?= $skl->skill_level?></th>
-                
+
               </tr>
               <?php } ?>
 
@@ -220,7 +219,7 @@ $this->load->view('template/navg');?>
 
                 <th><?= $l->skills_learn?></th>
                 <th><?= $l->mode_of_learn?></th>
-                
+
               </tr>
               <?php } ?>
 
